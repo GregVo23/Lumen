@@ -20,6 +20,8 @@ class Wine extends Model
 
     protected $table = 'wine';
 
+    public $timestamps = false;
+
     public function comment()
     {
         return $this->hasMany('App\Models\Comment');

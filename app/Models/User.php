@@ -24,6 +24,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     protected $table = 'user';
 
+    public $timestamps = false;
+
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -36,5 +38,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function userLike()
     {
         return $this->hasMany('App\Models\Like');
+    }
+
+    public function userComment()
+    {
+        return $this->hasMany('App\Models\Comment');
     }
 }

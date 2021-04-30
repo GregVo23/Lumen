@@ -20,6 +20,8 @@ class Like extends Model
 
     protected $table = 'like';
 
+    public $timestamps = false;
+    
     public function likeWine()
     {
         return $this->belongsTo('App\Models\Wine');

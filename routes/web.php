@@ -47,12 +47,11 @@ $router->get("/api/users/{id:[0-9]+}/likes/wines", 'WineController@getLikeWine')
 
 //PUT	/api/wines/10/like
 //{ "like" : true|false }
-
-
+$router->get("/api/wines/{id:[0-9]+}/like", 'WineController@likeThisWine');
 
 //POST	/api/wines/10/comments
 //{ "content" : "some content" }
-
+$router->post("/api/wines/{id:[0-9]+}/comments", 'WineController@commentThisWine');
 
 
 //PUT	/api/wines/10/comments/3

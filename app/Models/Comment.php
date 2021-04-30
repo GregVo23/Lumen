@@ -20,11 +20,16 @@ class Comment extends Model
 
     protected $table = 'comments';
 
+    public $timestamps = false;
 
     public function wine()
     {
         return $this->belongsTo('App\Models\Wine');
     }
 
+    public function commentUser()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }
 

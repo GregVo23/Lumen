@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\Like;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Wine;
@@ -40,7 +42,8 @@ class WineController extends Controller
      */
     public function getWineById($id)
     {
-        $wines = DB::select("select * from wine where id ='$id'");
+        //$wines = DB::select("select * from wine where id ='$id'");
+        $wines = wine::find($id);
         return $wines;
     }
 
@@ -120,7 +123,8 @@ class WineController extends Controller
         $wines = [];
         foreach($likes as $like)
         {
-            $wines = DB::select("select * from wine where id ='$like->wine_id'");
+            $wines = wine::find($like->wine_id);
+            //$wines = DB::select("select * from wine where id ='$like->wine_id'");
         }
         return $wines;
     }
@@ -132,6 +136,38 @@ class WineController extends Controller
      */
     public function likeThisWine($id)
     {
-        //
+        //$user_id = Auth::id();
+        $user_id = "1";  // juste pour les TESTS
+
+        $user = user::find($user_id);
+        $like = new Like([
+            'user_id' => $user_id,
+            'wine_id' => $id,
+            'like' => true,
+        ]);
+        $user->userLike()->save($like);
+    }
+
+    /**
+     * Ajoute un commentaire pour le vin x.
+     *
+     * @return $wines
+     */
+    public function commentThisWine($id)
+    {
+        //$user_id = Auth::id();
+        $user_id = "1";  // juste pour les TESTS
+
+        //$wine_id = $_POST['wine_id'];
+        $wine_id = $id;
+        $user = user::find($user_id);
+        //$content = $_POST['content'];
+        $content = "pas mal ce vin ...";
+        $comment = new Comment([
+            'user_id' => $user_id,
+            'wine_id' => $wine_id,
+            'content' => $content,
+        ]);
+        $user->userComment()->save($comment);
     }
 }
