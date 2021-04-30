@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Http\Controllers\WineController;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -20,24 +21,59 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+//GET	/api/wines
+$router->get('/api/wines', 'WineController@getAllWines');
 
-$router->get('/api/wines', function () use ($router) {
-    $wines = DB::select('select * from wine');
+//GET	/api/wines/10
+$router->get("/api/wines/{id:[0-9]+}", 'WineController@getWineById');
 
-    return $wines;
-});
+//GET	/api/wines?key=country&val=France&sort=year
+$router->get("/api/wines}", 'WineController@getWinesBySearch');
 
-$router->get("/api/wines/{id:[0-9]+}", function ($id) use ($router) {
-    $wines = DB::select("select * from wine where id ='$id'");
+//GET	/api/wines/search?keyword=Chateau
+$router->get("/api/wines/search", 'WineController@getWineByKeyword');
 
-    return $wines;
-});
+//GET	/api/wines/10/comments
+$router->get("/api/wines/{id:[0-9]+}/comments", 'WineController@getCommentWine');
 
-$router->get("/api/wines/search", function (Request $request) use ($router) {
-    $keyword = $request->keyword;
-    $wines = DB::select("select * from wine where name like '%$keyword%'");
+//GET	/api/wines/countries
+$router->get("/api/wines/countries", 'WineController@getCountries');
 
-    return $wines;
-});
+//GET	/api/wines/10/likes-count
+
+
+//GET	/api/users/5/likes/wines
+
+
+//PUT	/api/wines/10/like
+//{ "like" : true|false }
+
+
+
+//POST	/api/wines/10/comments
+//{ "content" : "some content" }
+
+
+
+//PUT	/api/wines/10/comments/3
+//{ "content" : "some new content" }
+
+
+
+//DELETE	/api/wines/10/comments/3
+
+
+
+//POST	/api/wines/10/pictures
+//FormData
+
+
+
+//DELETE	/api/wines/10/pictures/2
+
+
+
+//GET	/api/wines/10/pictures
+//Authorization
 
 
