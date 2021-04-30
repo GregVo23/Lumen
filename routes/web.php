@@ -40,10 +40,10 @@ $router->get("/api/wines/{id:[0-9]+}/comments", 'WineController@getCommentWine')
 $router->get("/api/wines/countries", 'WineController@getCountries');
 
 //GET	/api/wines/10/likes-count
-
+$router->get("/api/wines/{id:[0-9]+}/likes-count", 'WineController@getNbLike');
 
 //GET	/api/users/5/likes/wines
-
+$router->get("/api/users/{id:[0-9]+}/likes/wines", 'WineController@getLikeWine');
 
 //PUT	/api/wines/10/like
 //{ "like" : true|false }

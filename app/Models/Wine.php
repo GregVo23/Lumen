@@ -15,7 +15,7 @@ class Wine extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'year', 'grapes', 'country', 'description', 'picture',
+        'name', 'year', 'grapes', 'country', 'description', 'picture', 'id',
     ];
 
     protected $table = 'wine';
@@ -23,6 +23,11 @@ class Wine extends Model
     public function comment()
     {
         return $this->hasMany('App\Models\Comment');
+    }
+
+    public function wineLike()
+    {
+        return $this->hasMany('App\Models\Like');
     }
 
     public function getAll()

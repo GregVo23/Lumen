@@ -19,8 +19,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name', 'email', 'id'
     ];
+
+    protected $table = 'user';
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -30,4 +32,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function userLike()
+    {
+        return $this->hasMany('App\Models\Like');
+    }
 }
